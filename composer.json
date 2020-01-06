@@ -1,0 +1,6 @@
+{
+  "name": "msawicki/acf-menu-chooser",
+  "description": "A fork of acf-menu-chooser by reyhoun/acf-menu-chooser. Original can be found at https://github.com/reyhoun/acf-menu-chooser",
+  "type": "wordpress-plugin",
+  "minimum-stability": "dev",
+}
