@@ -97,9 +97,9 @@ class acf_field_menu_chooser extends acf_field {
 		$options          = '';
 		// Handle the default differently when the field is required for UX purposes
 		if ( $field[ 'required' ] ) {
-			$options .= '<option value="" ' . $default_selected . ' disabled>' . $this->select_label . '</option>';
+			$options .= '<option value="0" ' . $default_selected . ' disabled>' . $this->select_label . '</option>';
 		} else {
-			$options .= '<option value="" ' . $default_selected . '>' . $this->no_choice_label . '</option>';
+			$options .= '<option value="0" ' . $default_selected . '>' . $this->no_choice_label . '</option>';
 		}
 		if ( ! empty( $menus ) ) {
 			foreach ( $menus as $choice ) {
