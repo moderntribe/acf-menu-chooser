@@ -83,34 +83,39 @@ class acf_field_menu_chooser extends acf_field {
 
 		/**
 		 * Filter the field value
+		 *
 		 * @param $field_value
 		 */
-		$field_value = apply_filters('acf_menu_chooser_field_value', $field_value );
+		$field_value = apply_filters( 'acf_menu_chooser_field_value', $field_value );
 
 		$field[ 'choices' ] = [];
 		$menus              = wp_get_nav_menus();
 
 		echo '<select name="' . $field[ 'name' ] . '" class="acf-menu-chooser">';
-
+		// If there's no field value default to the first option
+		$default_selected = ! $field_value ? 'selected' : '';
+		$options          = '';
+		// Handle the default differently when the field is required for UX purposes
+		if ( $field[ 'required' ] ) {
+			$options .= '<option value="" ' . $default_selected . ' disabled>' . $this->select_label . '</option>';
+		} else {
+			$options .= '<option value="" ' . $default_selected . '>' . $this->no_choice_label . '</option>';
+		}
 		if ( ! empty( $menus ) ) {
 			foreach ( $menus as $choice ) {
 				$field[ 'choices' ][ $choice->menu_id ] = $choice->term_id;
 				$field[ 'choices' ][ $choice->name ]    = $choice->name;
 
-				// If there's no field value default to the first option
-				$default_selected = !$field_value ? 'selected' : '';
-
-				// Handle the default differently when the field is required for UX purposes
-				if ( $field['required'] ) {
-					echo '<option value="" ' . $default_selected . ' disabled>' . $this->select_label .'</option>' ;
-				} else {
-					echo '<option value="" ' . $default_selected . '>' . $this->no_choice_label .'</option>' ;
-				}
-				echo '<option  value="' . $field[ 'choices' ][ $choice->menu_id ] . '" ' . selected( $field_value,
+				$options .= '<option  value="' . esc_attr( $field[ 'choices' ][ $choice->menu_id ] ) . '" ' . selected( $field_value,
 						$field[ 'choices' ][ $choice->menu_id ],
-						false ) . ' >' . $field[ 'choices' ][ $choice->name ] . '</option>';
+						false ) . ' >' . esc_html( $field[ 'choices' ][ $choice->name ] ) . '</option>';
 			}
 		}
+		/**
+		 * Filter the options html. useful for adding custom options if needed
+		 */
+		echo apply_filters('acf_menu_chooser_options_html', $options);
+
 		echo '</select>';
 
 	}
