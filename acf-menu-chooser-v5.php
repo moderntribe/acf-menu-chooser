@@ -93,13 +93,12 @@ class acf_field_menu_chooser extends acf_field {
 
 		echo '<select name="' . $field[ 'name' ] . '" class="acf-menu-chooser">';
 		// If there's no field value default to the first option
-		$default_selected = ! $field_value ? 'selected' : '';
 		$options          = '';
 		// Handle the default differently when the field is required for UX purposes
 		if ( $field[ 'required' ] ) {
-			$options .= '<option value="0" ' . $default_selected . ' disabled>' . $this->select_label . '</option>';
+			$options .= '<option value="0" disabled>' . $this->select_label . '</option>';
 		} else {
-			$options .= '<option value="0" ' . $default_selected . '>' . $this->no_choice_label . '</option>';
+			$options .= '<option value="0">' . $this->no_choice_label . '</option>';
 		}
 		if ( ! empty( $menus ) ) {
 			foreach ( $menus as $choice ) {
