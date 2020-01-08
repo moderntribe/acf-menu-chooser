@@ -127,5 +127,3 @@ class acf_field_menu_chooser extends acf_field {
 
 // create field
 new acf_field_menu_chooser();
-
-?>
