@@ -93,7 +93,7 @@ class acf_field_menu_chooser extends acf_field {
 
 		echo '<select name="' . $field[ 'name' ] . '" class="acf-menu-chooser">';
 		// If there's no field value default to the first option
-		$options          = '';
+		$options = '';
 		// Handle the default differently when the field is required for UX purposes
 		if ( $field[ 'required' ] ) {
 			$options .= '<option value="0" disabled>' . $this->select_label . '</option>';
@@ -112,8 +112,11 @@ class acf_field_menu_chooser extends acf_field {
 		}
 		/**
 		 * Filter the options html. useful for adding custom options if needed
+		 *
+		 * @param string $options The select options
+		 * @param string $field_value The selected value
 		 */
-		echo apply_filters('acf_menu_chooser_options_html', $options);
+		echo apply_filters( 'acf_menu_chooser_options_html', $options, $field_value );
 
 		echo '</select>';
 
