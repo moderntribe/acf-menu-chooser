@@ -98,7 +98,8 @@ class acf_field_menu_chooser extends acf_field {
 		if ( $field[ 'required' ] ) {
 			$options .= '<option value="0" disabled>' . $this->select_label . '</option>';
 		} else {
-			$options .= '<option value="0">' . $this->no_choice_label . '</option>';
+			$options .= '<option value="0" ' . selected( $field_value, 0,
+					false ) . '>' . $this->no_choice_label . '</option>';
 		}
 		if ( ! empty( $menus ) ) {
 			foreach ( $menus as $choice ) {
