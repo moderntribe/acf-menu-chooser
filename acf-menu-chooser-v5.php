@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 class acf_field_menu_chooser extends acf_field {
 
 
